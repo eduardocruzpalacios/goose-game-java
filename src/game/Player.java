@@ -21,7 +21,7 @@ public class Player {
 	}
 
 	public void goTo(int dicesResult) {
-		this.board.movePlayer(this, this.squareId + dicesResult);
+		this.board.movePlayerTo(this, this.squareId + dicesResult);
 	}
 
 }

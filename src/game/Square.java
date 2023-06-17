@@ -3,7 +3,7 @@ package game;
 public abstract class Square {
 
 	private int id;
-	private Board board;
+	protected Board board;
 
 	public Square(Integer id, Board board) {
 		this.id = id;
@@ -14,5 +14,9 @@ public abstract class Square {
 		return id;
 	}
 
-	abstract public void landedOn();
+	public Board getBoard() {
+		return board;
+	}
+
+	abstract public void landedOn(Player player);
 }
