@@ -4,6 +4,7 @@ public class Player {
 
 	private int id;
 	private Board board;
+	private int squareId;
 
 	public Player(int id, Board board) {
 		this.id = id;
@@ -13,8 +14,6 @@ public class Player {
 	public int getId() {
 		return id;
 	}
-
-	private int squareId;
 
 	public void setSquareId(int squareId) {
 		this.squareId = squareId;

@@ -1,4 +1,7 @@
-package game;
+package game.squares;
+
+import game.Board;
+import game.Player;
 
 public abstract class Square {
 

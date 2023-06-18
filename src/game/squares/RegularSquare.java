@@ -2,7 +2,6 @@ package game.squares;
 
 import game.Board;
 import game.Player;
-import game.Square;
 
 public class RegularSquare extends Square{
 
