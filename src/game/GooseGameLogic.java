@@ -3,13 +3,13 @@ package game;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Game {
+public class GooseGameLogic {
 
 	private Board board;
 	private Map<Integer, Player> players;
 	private int playerIdToPlayNextTurn;
 
-	public Game(int playersNumber) {
+	public GooseGameLogic(int playersNumber) {
 		super();
 		this.board = new Board(this);
 		this.players = new HashMap<Integer, Player>();
