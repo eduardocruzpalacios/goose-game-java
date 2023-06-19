@@ -12,7 +12,6 @@ public class GooseSquare extends Square{
 	@Override
 	public void landedOn(Player player) {
 		this.getBoard().executeLandedOnGooseSquare(player, this.getId());
-		return;
 	}
 
 }

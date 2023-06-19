@@ -12,7 +12,6 @@ public class BridgeSquare extends Square{
 	@Override
 	public void landedOn(Player player) {
 		this.getBoard().executeLandedOnBridgeSquare(player, this.getId());
-		return;
 	}
 
 }
