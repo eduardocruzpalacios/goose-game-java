@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import game.player.Player;
 import game.squares.Square;
 
 public class Board {
@@ -20,14 +21,14 @@ public class Board {
 	}
 
 	public void movePlayerTo(Player player, int squareId) {
-		Square square = squares.get(squareId);
+		Square square = this.squares.get(squareId);
 		player.setSquareId(squareId);
 		this.gooseGameLogic.giveTurnToNextPlayer();
 		square.landedOn(player);
 	}
 
 	public void executeLandedOnGooseSquare(Player player, int currentGooseSquareId) {
-		int nextGooseSquareId = gooseSquaresIds.indexOf(currentGooseSquareId) + 1;
+		int nextGooseSquareId = this.gooseSquaresIds.indexOf(currentGooseSquareId) + 1;
 		player.setSquareId(nextGooseSquareId);
 		this.gooseGameLogic.givePlayerExtraTurn(player);
 	}
@@ -36,6 +37,10 @@ public class Board {
 		int theOtherBridgeSquareId  = this.bridgeSquaresIdsMap.get(currentBridgeSquareId);
 		player.setSquareId(theOtherBridgeSquareId);
 		this.gooseGameLogic.givePlayerExtraTurn(player);
+	}
+
+	public void executeLandedOnInnSquare(Player player) {
+		this.gooseGameLogic.makePlayerLooseTurns(player, 2);
 	}
 
 }

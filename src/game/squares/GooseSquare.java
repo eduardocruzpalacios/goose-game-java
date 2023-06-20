@@ -1,7 +1,7 @@
 package game.squares;
 
 import game.Board;
-import game.Player;
+import game.player.Player;
 
 public class GooseSquare extends Square{
 

@@ -3,6 +3,9 @@ package game;
 import java.util.HashMap;
 import java.util.Map;
 
+import game.player.Player;
+import game.player.PlayerNoTurnsState;
+
 public class GooseGameLogic {
 
 	private Board board;
@@ -26,11 +29,14 @@ public class GooseGameLogic {
 		} else {
 			this.playerIdToPlayNextTurn++;
 		}
-
 	}
 
 	public void givePlayerExtraTurn(Player player) {
 		this.playerIdToPlayNextTurn = player.getId();
+	}
+
+	public void makePlayerLooseTurns(Player player, int turnsNumber) {
+		player.setPlayerState(new PlayerNoTurnsState(player, turnsNumber));
 	}
 
 }
