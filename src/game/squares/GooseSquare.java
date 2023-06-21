@@ -3,7 +3,7 @@ package game.squares;
 import game.Board;
 import game.player.Player;
 
-public class GooseSquare extends Square{
+public class GooseSquare extends Square {
 
 	public GooseSquare(Integer id, Board board) {
 		super(id, board);
@@ -11,7 +11,7 @@ public class GooseSquare extends Square{
 
 	@Override
 	public void landedOn(Player player) {
-		this.getBoard().executeLandedOnGooseSquare(player, this.getId());
+		this.getBoard().movePlayerToNextGooseSquare(player, this.getId());
 	}
 
 }

@@ -3,7 +3,7 @@ package game.squares;
 import game.Board;
 import game.player.Player;
 
-public class BridgeSquare extends Square{
+public class BridgeSquare extends Square {
 
 	public BridgeSquare(Integer id, Board board) {
 		super(id, board);
@@ -11,7 +11,7 @@ public class BridgeSquare extends Square{
 
 	@Override
 	public void landedOn(Player player) {
-		this.getBoard().executeLandedOnBridgeSquare(player, this.getId());
+		this.getBoard().movePlayerToTheOtherBridgeSquare(player, this.getId());
 	}
 
 }

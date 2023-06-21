@@ -14,7 +14,7 @@ public class Board {
 	private Map<Integer, Square> squares;
 	private final List<Integer> gooseSquaresIds = new ArrayList<>(
 			List.of(1, 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, 63));
-	private final Map<Integer, Integer>bridgeSquaresIdsMap = new HashMap<Integer, Integer>(Map.of(6, 12, 12, 6));
+	private final Map<Integer, Integer> bridgeSquaresIdsMap = new HashMap<Integer, Integer>(Map.of(6, 12, 12, 6));
 
 	public Board(GooseGameLogic gooseGameLogic) {
 		this.gooseGameLogic = gooseGameLogic;
@@ -27,20 +27,20 @@ public class Board {
 		square.landedOn(player);
 	}
 
-	public void executeLandedOnGooseSquare(Player player, int currentGooseSquareId) {
+	public void movePlayerToNextGooseSquare(Player player, int currentGooseSquareId) {
 		int nextGooseSquareId = this.gooseSquaresIds.indexOf(currentGooseSquareId) + 1;
 		player.setSquareId(nextGooseSquareId);
 		this.gooseGameLogic.givePlayerExtraTurn(player);
 	}
 
-	public void executeLandedOnBridgeSquare(Player player, int currentBridgeSquareId) {
-		int theOtherBridgeSquareId  = this.bridgeSquaresIdsMap.get(currentBridgeSquareId);
+	public void movePlayerToTheOtherBridgeSquare(Player player, int currentBridgeSquareId) {
+		int theOtherBridgeSquareId = this.bridgeSquaresIdsMap.get(currentBridgeSquareId);
 		player.setSquareId(theOtherBridgeSquareId);
 		this.gooseGameLogic.givePlayerExtraTurn(player);
 	}
 
-	public void executeLandedOnInnSquare(Player player) {
-		this.gooseGameLogic.makePlayerLooseTurns(player, 2);
+	public void makePlayerLooseTurns(Player player, int turnsNumber) {
+		this.gooseGameLogic.makePlayerLooseTurns(player, turnsNumber);
 	}
 
 }
