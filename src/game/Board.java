@@ -20,11 +20,15 @@ public class Board {
 		this.gooseGameLogic = gooseGameLogic;
 	}
 
-	public void movePlayerTo(Player player, int squareId) {
+	public void playerPlaysTurn(Player player, int squareId) {
+		this.makePlayerGoTo(player, squareId);
 		Square square = this.squares.get(squareId);
+		square.landedOn(player);
+	}
+
+	public void makePlayerGoTo(Player player, int squareId) {
 		player.setSquareId(squareId);
 		this.gooseGameLogic.giveTurnToNextPlayer();
-		square.landedOn(player);
 	}
 
 	public void movePlayerToNextGooseSquare(Player player, int currentGooseSquareId) {
