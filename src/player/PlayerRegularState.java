@@ -1,4 +1,4 @@
-package game.player;
+package player;
 
 public class PlayerRegularState implements PlayerState {
 

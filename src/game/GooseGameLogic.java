@@ -3,8 +3,8 @@ package game;
 import java.util.HashMap;
 import java.util.Map;
 
-import game.player.Player;
-import game.player.PlayerNoTurnsState;
+import player.Player;
+import player.PlayerNoTurnsState;
 
 public class GooseGameLogic {
 

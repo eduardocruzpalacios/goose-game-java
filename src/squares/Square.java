@@ -1,7 +1,7 @@
 package squares;
 
 import game.Board;
-import game.player.Player;
+import player.Player;
 
 public abstract class Square {
 
