@@ -1,6 +1,6 @@
 package game;
 
-public interface GooseGameLogicState {
+public interface GooseGameLogicFacadeState {
 
 	public void playNextTurn();
 

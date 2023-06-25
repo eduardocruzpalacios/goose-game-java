@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import game.GooseGameLogic;
+import game.GooseGameLogicFacade;
 import player.Player;
 import player.PlayerNoTurnsState;
 import squares.Square;
 
 public class Board {
 
-	private GooseGameLogic gooseGameLogic;
+	private GooseGameLogicFacade gooseGameLogicFacade;
 	private Map<Integer, Player> players;
 	private int playerIdToPlayNextTurn;
 	private Map<Integer, Square> squares;
@@ -20,8 +20,8 @@ public class Board {
 			List.of(1, 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, 63));
 	private final Map<Integer, Integer> bridgeSquaresIdsMap = new HashMap<Integer, Integer>(Map.of(6, 12, 12, 6));
 
-	public Board(GooseGameLogic gooseGameLogic, int playersNumber) {
-		this.gooseGameLogic = gooseGameLogic;
+	public Board(GooseGameLogicFacade gooseGameLogicFacade, int playersNumber) {
+		this.gooseGameLogicFacade = gooseGameLogicFacade;
 		this.players = new HashMap<Integer, Player>();
 		for (int i = 1; i <= playersNumber; i++) {
 			Player player = new Player(i, this);
@@ -30,7 +30,7 @@ public class Board {
 		this.playerIdToPlayNextTurn = 1;
 	}
 
-	public void playerPlaysTurn(Player player, int squareId) {
+	public void playerPlaysTurnAndLandOnSquare(Player player, int squareId) {
 		this.makePlayerGoTo(player, squareId);
 		player.setSquareId(squareId);
 		this.giveTurnToNextPlayer();
@@ -71,7 +71,7 @@ public class Board {
 	}
 
 	public void finishGame(Player player) {
-		this.gooseGameLogic.finishGame(player);
+		this.gooseGameLogicFacade.finishGame(player);
 	}
 
 }

@@ -27,7 +27,7 @@ public class Player {
 	}
 
 	public void goTo(int dicesResult) {
-		this.board.playerPlaysTurn(this, this.squareId + dicesResult);
+		this.board.playerPlaysTurnAndLandOnSquare(this, this.squareId + dicesResult);
 	}
 
 	public void playTurn() {
