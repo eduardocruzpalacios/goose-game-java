@@ -1,4 +1,4 @@
-package game.squares;
+package squares;
 
 import game.Board;
 import game.player.Player;

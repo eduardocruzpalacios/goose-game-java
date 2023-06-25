@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import game.player.Player;
-import game.squares.Square;
+import squares.Square;
 
 public class Board {
 
