@@ -3,6 +3,7 @@ package game;
 import java.util.HashMap;
 import java.util.Map;
 
+import board.Board;
 import player.Player;
 import player.PlayerNoTurnsState;
 

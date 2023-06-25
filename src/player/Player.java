@@ -1,6 +1,6 @@
 package player;
 
-import game.Board;
+import board.Board;
 
 public class Player {
 

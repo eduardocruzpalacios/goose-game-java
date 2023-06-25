@@ -1,6 +1,6 @@
 package squares;
 
-import game.Board;
+import board.Board;
 import player.Player;
 
 public class SkullSquare extends Square {
