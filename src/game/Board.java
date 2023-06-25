@@ -22,13 +22,13 @@ public class Board {
 
 	public void playerPlaysTurn(Player player, int squareId) {
 		this.makePlayerGoTo(player, squareId);
+		this.gooseGameLogic.giveTurnToNextPlayer();
 		Square square = this.squares.get(squareId);
 		square.landedOn(player);
 	}
 
 	public void makePlayerGoTo(Player player, int squareId) {
 		player.setSquareId(squareId);
-		this.gooseGameLogic.giveTurnToNextPlayer();
 	}
 
 	public void movePlayerToNextGooseSquare(Player player, int currentGooseSquareId) {
@@ -45,6 +45,10 @@ public class Board {
 
 	public void makePlayerLooseTurns(Player player, int turnsNumber) {
 		this.gooseGameLogic.makePlayerLooseTurns(player, turnsNumber);
+	}
+
+	public void finishGame(Player player) {
+		this.gooseGameLogic.finishGame(player);
 	}
 
 }

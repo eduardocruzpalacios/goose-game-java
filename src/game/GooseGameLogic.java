@@ -11,6 +11,7 @@ public class GooseGameLogic {
 	private Board board;
 	private Map<Integer, Player> players;
 	private int playerIdToPlayNextTurn;
+	private GooseGameLogicState gooseGameLogicState;
 
 	public GooseGameLogic(int playersNumber) {
 		super();
@@ -21,6 +22,10 @@ public class GooseGameLogic {
 			this.players.put(player.getId(), player);
 		}
 		this.playerIdToPlayNextTurn = 1;
+	}
+
+	public void setGooseGameLogicState(GooseGameLogicState gooseGameLogicState) {
+		this.gooseGameLogicState = gooseGameLogicState;
 	}
 
 	public void giveTurnToNextPlayer() {
@@ -37,6 +42,10 @@ public class GooseGameLogic {
 
 	public void makePlayerLooseTurns(Player player, int turnsNumber) {
 		player.setPlayerState(new PlayerNoTurnsState(player, turnsNumber));
+	}
+
+	public void finishGame(Player player) {
+		this.setGooseGameLogicState(new GameOverState());
 	}
 
 }
