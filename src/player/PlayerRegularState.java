@@ -1,5 +1,8 @@
 package player;
 
+import dice.Dice;
+import dice.DiceSingleton;
+
 public class PlayerRegularState implements PlayerState {
 
 	private Player player;
@@ -10,7 +13,13 @@ public class PlayerRegularState implements PlayerState {
 
 	@Override
 	public void playTurn() {
-		// TODO actual turn where dices are thrown and movePlayerTo is called
+		int diceResult = 0;
+		Dice dice = DiceSingleton.getDiceInstance();
+		dice.roll();
+		diceResult += dice.getFaceValue();
+		dice.roll();
+		diceResult += dice.getFaceValue();
+		this.player.moveSquares(diceResult);
 	}
 
 }

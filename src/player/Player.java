@@ -26,7 +26,7 @@ public class Player {
 		this.playerState = playerState;
 	}
 
-	public void goTo(int dicesResult) {
+	public void moveSquares(int dicesResult) {
 		this.board.playerPlaysTurnAndLandOnSquare(this, this.squareId + dicesResult);
 	}
 
