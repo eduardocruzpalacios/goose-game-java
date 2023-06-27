@@ -1,10 +1,10 @@
 package dice;
 
-public class Dice {
+public class DiceModel {
 
 	private int faceValue;
 
-	public Dice() {
+	public DiceModel() {
 	}
 
 	public void roll() {

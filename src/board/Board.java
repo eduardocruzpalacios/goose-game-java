@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dice.DiceServiceSingleton;
 import game.GooseGameLogicFacade;
 import player.Player;
 import player.PlayerNoTurnsState;
@@ -32,7 +33,6 @@ public class Board {
 
 	public void playerPlaysTurnAndLandOnSquare(Player player, int squareId) {
 		this.makePlayerGoTo(player, squareId);
-		player.setSquareId(squareId);
 		this.giveTurnToNextPlayer();
 		Square square = this.squares.get(squareId);
 		square.landedOn(player);
@@ -52,7 +52,7 @@ public class Board {
 
 	public void movePlayerToNextGooseSquare(Player player, int currentGooseSquareId) {
 		int nextGooseSquareId = this.gooseSquaresIds.indexOf(currentGooseSquareId) + 1;
-		player.setSquareId(nextGooseSquareId);
+		this.makePlayerGoTo(player, nextGooseSquareId);
 		this.givePlayerExtraTurn(player);
 	}
 
@@ -62,7 +62,7 @@ public class Board {
 
 	public void movePlayerToTheOtherBridgeSquare(Player player, int currentBridgeSquareId) {
 		int theOtherBridgeSquareId = this.bridgeSquaresIdsMap.get(currentBridgeSquareId);
-		player.setSquareId(theOtherBridgeSquareId);
+		this.makePlayerGoTo(player, theOtherBridgeSquareId);
 		this.givePlayerExtraTurn(player);
 	}
 
@@ -72,6 +72,10 @@ public class Board {
 
 	public void finishGame(Player player) {
 		this.gooseGameLogicFacade.finishGame(player);
+	}
+
+	public void executeLandedOnDiceSquare(Player player, int squareId) {
+		this.makePlayerGoTo(player, squareId + DiceServiceSingleton.getInstance().getLastRollValue());
 	}
 
 }

@@ -1,7 +1,6 @@
 package player;
 
-import dice.Dice;
-import dice.DiceSingleton;
+import dice.DiceServiceSingleton;
 
 public class PlayerRegularState implements PlayerState {
 
@@ -13,12 +12,7 @@ public class PlayerRegularState implements PlayerState {
 
 	@Override
 	public void playTurn() {
-		int diceResult = 0;
-		Dice dice = DiceSingleton.getDiceInstance();
-		dice.roll();
-		diceResult += dice.getFaceValue();
-		dice.roll();
-		diceResult += dice.getFaceValue();
+		int diceResult = DiceServiceSingleton.getInstance().get2DiceRolledValue();
 		this.player.moveSquares(diceResult);
 	}
 
