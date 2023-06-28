@@ -8,6 +8,7 @@ import java.util.Map;
 import dice.DiceServiceSingleton;
 import game.GooseGameLogicFacade;
 import player.Player;
+import player.PlayerFirstTurnState;
 import player.PlayerNoTurnsState;
 import squares.Square;
 
@@ -26,6 +27,7 @@ public class Board {
 		this.players = new HashMap<Integer, Player>();
 		for (int i = 1; i <= playersNumber; i++) {
 			Player player = new Player(i, this);
+			player.setPlayerState(new PlayerFirstTurnState(player));
 			this.players.put(player.getId(), player);
 		}
 		this.playerIdToPlayNextTurn = 1;
