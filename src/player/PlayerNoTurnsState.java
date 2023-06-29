@@ -15,7 +15,7 @@ public class PlayerNoTurnsState implements PlayerState {
 		if (turnsWithoutPlaying > 0) {
 			this.turnsWithoutPlaying--;
 		} else {
-			this.player.setPlayerState(new PlayerRegularState(this.player));
+			PlayerStateHandler.setRegularState(this.player);
 		}
 	}
 

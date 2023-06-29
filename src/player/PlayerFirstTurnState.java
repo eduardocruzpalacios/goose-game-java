@@ -14,7 +14,7 @@ public class PlayerFirstTurnState implements PlayerState {
 	public void playTurn() {
 		int diceResult = DiceServiceSingleton.getInstance().getFirstRollByPlayerValue();
 		this.player.moveSquares(diceResult);
-		this.player.setPlayerState(new PlayerRegularState(this.player));
+		PlayerStateHandler.setRegularState(this.player);
 	}
 
 }
