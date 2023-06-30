@@ -14,4 +14,8 @@ public class PlayerStateHandler {
 		player.setPlayerState(new PlayerNoTurnsState(player, turnsNumber));
 	}
 
+	static public void set1DiceState(Player player) {
+		player.setPlayerState(new Player1DiceState(player));
+	}
+
 }

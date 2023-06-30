@@ -11,9 +11,8 @@ public class DiceService {
 		this.diceModel2 = new DiceModel();
 	}
 
-	private void roll2Dice() {
-		this.diceModel1.roll();
-		this.diceModel2.roll();
+	public int getLastRollValue() {
+		return this.lastRollValue;
 	}
 
 	public int get2DiceRolledValue() {
@@ -23,8 +22,9 @@ public class DiceService {
 		return diceResult;
 	}
 
-	public int getLastRollValue() {
-		return this.lastRollValue;
+	private void roll2Dice() {
+		this.diceModel1.roll();
+		this.diceModel2.roll();
 	}
 
 	public int getFirstRollByPlayerValue() {
@@ -36,6 +36,13 @@ public class DiceService {
 			}
 			return 53;
 		}
+		this.lastRollValue = diceResult;
+		return diceResult;
+	}
+
+	public int get1DiceRolledValue() {
+		this.diceModel1.roll();
+		int diceResult = diceModel1.getFaceValue();
 		this.lastRollValue = diceResult;
 		return diceResult;
 	}

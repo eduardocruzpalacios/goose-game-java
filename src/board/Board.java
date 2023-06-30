@@ -41,6 +41,9 @@ public class Board {
 
 	public void makePlayerGoTo(Player player, int squareId) {
 		player.setSquareId(squareId);
+		if (squareId >= 60) {
+			PlayerStateHandler.set1DiceState(player);
+		}
 	}
 
 	public void giveTurnToNextPlayer() {
