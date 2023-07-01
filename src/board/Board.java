@@ -20,6 +20,7 @@ public class Board {
 	private final List<Integer> gooseSquaresIds = new ArrayList<>(
 			List.of(1, 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, 63));
 	private final Map<Integer, Integer> bridgeSquaresIdsMap = new HashMap<Integer, Integer>(Map.of(6, 12, 12, 6));
+	private BoardState boardState;
 
 	public Board(GooseGameLogicFacade gooseGameLogicFacade, int playersNumber) {
 		this.gooseGameLogicFacade = gooseGameLogicFacade;
@@ -30,6 +31,11 @@ public class Board {
 			this.players.put(player.getId(), player);
 		}
 		this.playerIdToPlayNextTurn = 1;
+		BoardStateHandler.setGameRunningState(this);
+	}
+
+	public void setBoardState(BoardState boardState) {
+		this.boardState = boardState;
 	}
 
 	public void playerPlaysTurnAndLandOnSquare(Player player, int squareId) {
@@ -43,6 +49,9 @@ public class Board {
 		player.setSquareId(squareId);
 		if (squareId >= 60) {
 			PlayerStateHandler.set1DiceState(player);
+		}
+		if (squareId == 63) {
+			BoardStateHandler.setGameOverState(this);
 		}
 	}
 
@@ -72,10 +81,6 @@ public class Board {
 
 	public void makePlayerLooseTurns(Player player, int turnsNumber) {
 		PlayerStateHandler.setNoTurnsState(player, turnsNumber);
-	}
-
-	public void finishGame(Player player) {
-		this.gooseGameLogicFacade.finishGame(player);
 	}
 
 	public void executeLandedOnDiceSquare(Player player, int squareId) {
