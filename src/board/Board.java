@@ -17,10 +17,12 @@ public class Board {
 	private Map<Integer, Player> players;
 	private int playerIdToPlayNextTurn;
 	private Map<Integer, Square> squares;
-	private final List<Integer> gooseSquaresIds = new ArrayList<>(
+	private List<Integer> gooseSquaresIds = new ArrayList<>(
 			List.of(1, 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, 63));
-	private final Map<Integer, Integer> bridgeSquaresIdsMap = new HashMap<Integer, Integer>(Map.of(6, 12, 12, 6));
+	private Map<Integer, Integer> bridgeSquaresIdsMap = new HashMap<Integer, Integer>(Map.of(6, 12, 12, 6));
 	private BoardState boardState;
+	private final int SQUARES_NUMBER = 63;
+	private final int SQUARE_FROM_WHICH_1_DICE_RULE_APPLIES = 60;
 
 	public Board(GooseGameLogicFacade gooseGameLogicFacade, int playersNumber) {
 		this.gooseGameLogicFacade = gooseGameLogicFacade;
@@ -46,12 +48,15 @@ public class Board {
 	}
 
 	public void makePlayerGoTo(Player player, int squareId) {
-		player.setSquareId(squareId);
-		if (squareId >= 60) {
-			PlayerStateHandler.set1DiceState(player);
-		}
-		if (squareId == 63) {
-			BoardStateHandler.setGameOverState(this);
+		if (squareId > this.SQUARES_NUMBER) {
+			player.setSquareId(this.SQUARES_NUMBER - (squareId - this.SQUARES_NUMBER));
+		} else {
+			if (squareId == this.SQUARES_NUMBER) {
+				BoardStateHandler.setGameOverState(this);
+			} else if (squareId >= this.SQUARE_FROM_WHICH_1_DICE_RULE_APPLIES) {
+				PlayerStateHandler.set1DiceState(player);
+			}
+			player.setSquareId(squareId);
 		}
 	}
 
