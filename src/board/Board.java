@@ -40,7 +40,7 @@ public class Board {
 		this.boardState = boardState;
 	}
 
-	public void playerPlaysTurnAndLandOnSquare(Player player, int squareId) {
+	public void playerPlaysTurnAndLandsOnSquare(Player player, int squareId) {
 		this.makePlayerGoTo(player, squareId);
 		this.giveTurnToNextPlayer();
 		Square square = this.squares.get(squareId);
