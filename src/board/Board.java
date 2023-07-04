@@ -92,4 +92,8 @@ public class Board {
 		this.makePlayerGoTo(player, squareId + DiceServiceSingleton.getInstance().getLastRollValue());
 	}
 
+	public void playTurn() {
+		this.players.get(this.playerIdToPlayNextTurn).playTurn();
+	}
+
 }
