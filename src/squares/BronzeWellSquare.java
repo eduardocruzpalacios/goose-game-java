@@ -3,9 +3,9 @@ package squares;
 import board.Board;
 import player.Player;
 
-public class BronzeSquare extends Square {
+public class BronzeWellSquare extends Square {
 
-	public BronzeSquare(Integer id, Board board) {
+	public BronzeWellSquare(Integer id, Board board) {
 		super(id, board);
 	}
 
