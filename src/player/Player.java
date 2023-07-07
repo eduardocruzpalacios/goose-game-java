@@ -18,6 +18,10 @@ public class Player {
 		return id;
 	}
 
+	public int getSquareId() {
+		return squareId;
+	}
+
 	public void setSquareId(int squareId) {
 		this.squareId = squareId;
 	}

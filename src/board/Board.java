@@ -137,4 +137,14 @@ public class Board {
 		this.players.get(this.playerIdToPlayNextTurn).playTurn();
 	}
 
+	public BoardLastTurnAPI getBoardLastTurnAPI() {
+		int playerIdWhoPlayed;
+		if (this.playerIdToPlayNextTurn == 1) {
+			playerIdWhoPlayed = this.players.size();
+		} else {
+			playerIdWhoPlayed = this.playerIdToPlayNextTurn - 1;
+		}
+		return new BoardLastTurnAPI(playerIdWhoPlayed, this.players.get(playerIdWhoPlayed).getSquareId());
+	}
+
 }
