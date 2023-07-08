@@ -46,6 +46,14 @@ public class Board {
 		BoardStateHandler.setGameRunningState(this);
 	}
 
+	public Map<Integer, Player> getPlayers() {
+		return players;
+	}
+
+	public int getPlayerIdToPlayNextTurn() {
+		return playerIdToPlayNextTurn;
+	}
+
 	public void setBoardState(BoardState boardState) {
 		this.boardState = boardState;
 	}
@@ -133,8 +141,8 @@ public class Board {
 		this.makePlayerGoTo(player, squareId + DiceServiceSingleton.getInstance().getLastRollValue());
 	}
 
-	public void playTurn() {
-		this.players.get(this.playerIdToPlayNextTurn).playTurn();
+	public void playNextTurn() {
+		this.boardState.playNextTurn();
 	}
 
 	public BoardLastTurnAPI getBoardLastTurnAPI() {

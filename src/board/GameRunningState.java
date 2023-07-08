@@ -14,7 +14,7 @@ public class GameRunningState implements BoardState {
 
 	@Override
 	public void playNextTurn() {
-		return;
+		this.board.getPlayers().get(board.getPlayerIdToPlayNextTurn()).playTurn();
 	}
 
 }
