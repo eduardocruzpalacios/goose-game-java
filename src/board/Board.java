@@ -121,6 +121,9 @@ public class Board {
 		int nextGooseSquareId = this.gooseSquaresIds.indexOf(currentGooseSquareId) + 1;
 		this.makePlayerGoTo(player, nextGooseSquareId);
 		this.givePlayerExtraTurn(player);
+		if (nextGooseSquareId == this.gooseSquaresIds.get(this.gooseSquaresIds.size() - 1)) {
+			BoardStateHandler.setGameRunningState(this);
+		}
 	}
 
 	public void givePlayerExtraTurn(Player player) {
