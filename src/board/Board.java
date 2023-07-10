@@ -117,7 +117,7 @@ public class Board {
 		}
 	}
 
-	public void movePlayerToNextGooseSquare(Player player, int currentGooseSquareId) {
+	public void executeLandedOnGooseSquare(Player player, int currentGooseSquareId) {
 		int nextGooseSquareId = this.gooseSquaresIds.indexOf(currentGooseSquareId) + 1;
 		this.makePlayerGoTo(player, nextGooseSquareId);
 		this.givePlayerExtraTurn(player);
@@ -130,7 +130,7 @@ public class Board {
 		this.playerIdToPlayNextTurn = player.getId();
 	}
 
-	public void movePlayerToTheOtherBridgeSquare(Player player, int currentBridgeSquareId) {
+	public void executeLandedOnBridgeSquare(Player player, int currentBridgeSquareId) {
 		int theOtherBridgeSquareId = this.bridgeSquaresIdsMap.get(currentBridgeSquareId);
 		this.makePlayerGoTo(player, theOtherBridgeSquareId);
 		this.givePlayerExtraTurn(player);

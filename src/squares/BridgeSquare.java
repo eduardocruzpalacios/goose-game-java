@@ -11,7 +11,7 @@ public class BridgeSquare extends Square {
 
 	@Override
 	public void landedOn(Player player) {
-		this.getBoard().movePlayerToTheOtherBridgeSquare(player, this.getId());
+		this.getBoard().executeLandedOnBridgeSquare(player, this.getId());
 	}
 
 }

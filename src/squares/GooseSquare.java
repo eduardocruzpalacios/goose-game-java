@@ -11,7 +11,7 @@ public class GooseSquare extends Square {
 
 	@Override
 	public void landedOn(Player player) {
-		this.getBoard().movePlayerToNextGooseSquare(player, this.getId());
+		this.getBoard().executeLandedOnGooseSquare(player, this.getId());
 	}
 
 }
