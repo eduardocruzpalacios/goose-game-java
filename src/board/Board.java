@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import dice.DiceServiceSingleton;
-import game.GooseGameLogicFacade;
 import player.Player;
 import player.PlayerStateHandler;
 import squares.BridgeSquare;
@@ -22,7 +21,6 @@ import squares.Square;
 
 public class Board {
 
-	private GooseGameLogicFacade gooseGameLogicFacade;
 	private Map<Integer, Player> players;
 	private int playerIdToPlayNextTurn;
 	private Map<Integer, Square> squares;
@@ -33,8 +31,7 @@ public class Board {
 	private final int SQUARES_NUMBER = 63;
 	private final int SQUARE_FROM_WHICH_1_DICE_RULE_APPLIES = 60;
 
-	public Board(GooseGameLogicFacade gooseGameLogicFacade, int playersNumber) {
-		this.gooseGameLogicFacade = gooseGameLogicFacade;
+	public Board(int playersNumber) {
 		this.players = new HashMap<Integer, Player>();
 		for (int i = 1; i <= playersNumber; i++) {
 			Player player = new Player(i, this);

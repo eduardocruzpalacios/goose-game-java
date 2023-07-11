@@ -7,7 +7,7 @@ public class GooseGameLogicFacade {
 	private Board board;
 
 	public GooseGameLogicFacade(int playersNumber) {
-		this.board = new Board(this, playersNumber);
+		this.board = new Board(playersNumber);
 	}
 
 }
