@@ -152,7 +152,8 @@ public class Board {
 		} else {
 			playerIdWhoPlayed = this.playerIdToPlayNextTurn - 1;
 		}
-		return new BoardLastTurnAPI(playerIdWhoPlayed, this.players.get(playerIdWhoPlayed).getSquareId());
+		return new BoardLastTurnAPI(playerIdWhoPlayed, this.players.get(playerIdWhoPlayed).getSquareId(),
+				boardState instanceof GameOverState);
 	}
 
 }
