@@ -9,9 +9,10 @@ public class Player {
 	private int squareId;
 	private PlayerState playerState;
 
-	public Player(int id, Board board) {
+	public Player(int id, Board board, int squareId) {
 		this.id = id;
 		this.board = board;
+		this.squareId = squareId;
 	}
 
 	public int getId() {

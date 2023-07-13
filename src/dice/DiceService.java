@@ -32,7 +32,7 @@ public class DiceService {
 		int diceResult = diceModel1.getFaceValue() + diceModel2.getFaceValue();
 		if (diceResult == 9) {
 			if (diceModel1.getFaceValue() == 3 || diceModel2.getFaceValue() == 3) {
-				return 26;
+				return 23;
 			}
 			return 53;
 		}

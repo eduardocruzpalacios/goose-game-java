@@ -23,18 +23,19 @@ public class Board {
 
 	private Map<Integer, Player> players;
 	private int playerIdToPlayNextTurn;
-	private Map<Integer, Square> squares;
+	private Map<Integer, Square> squares = new HashMap<Integer, Square>();
 	private List<Integer> gooseSquaresIds = new ArrayList<>(
 			List.of(1, 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, 63));
 	private Map<Integer, Integer> bridgeSquaresIdsMap = new HashMap<Integer, Integer>(Map.of(6, 12, 12, 6));
 	private BoardState boardState;
 	private final int SQUARES_NUMBER = 63;
 	private final int SQUARE_FROM_WHICH_1_DICE_RULE_APPLIES = 60;
+	private boolean isExtraTurn = false;
 
 	public Board(int playersNumber) {
 		this.players = new HashMap<Integer, Player>();
 		for (int i = 1; i <= playersNumber; i++) {
-			Player player = new Player(i, this);
+			Player player = new Player(i, this, 0);
 			PlayerStateHandler.setFirstTurnState(player);
 			this.players.put(player.getId(), player);
 		}
@@ -80,16 +81,25 @@ public class Board {
 		this.squares.put(skullSquare.getId(), skullSquare);
 		for (int i = 0; i <= 63; i++) {
 			if (this.squares.get(i) == null) {
-				Square regulSquare = new RegularSquare(i, this);
-				this.squares.put(i, regulSquare);
+				Square regularSquare = new RegularSquare(i, this);
+				this.squares.put(i, regularSquare);
 			}
 		}
 	}
 
 	public void playerPlaysTurnAndLandsOnSquare(Player player, int squareId) {
-		this.makePlayerGoTo(player, squareId);
+		if (this.isExtraTurn) {
+			this.isExtraTurn = false;
+		}
+		int validSquareId;
+		if (squareId > this.SQUARES_NUMBER) {
+			validSquareId = this.SQUARES_NUMBER - (squareId - this.SQUARES_NUMBER);
+		} else {
+			validSquareId = squareId;
+		}
+		this.makePlayerGoTo(player, validSquareId);
 		this.giveTurnToNextPlayer();
-		Square square = this.squares.get(squareId);
+		Square square = this.squares.get(validSquareId);
 		square.landedOn(player);
 	}
 
@@ -97,7 +107,7 @@ public class Board {
 		if (squareId > this.SQUARES_NUMBER) {
 			player.setSquareId(this.SQUARES_NUMBER - (squareId - this.SQUARES_NUMBER));
 		} else {
-			if (squareId == this.SQUARES_NUMBER) {
+			if (squareId == this.SQUARES_NUMBER && !this.isExtraTurn) {
 				BoardStateHandler.setGameOverState(this);
 			} else if (squareId >= this.SQUARE_FROM_WHICH_1_DICE_RULE_APPLIES) {
 				PlayerStateHandler.set1DiceState(player);
@@ -107,7 +117,7 @@ public class Board {
 	}
 
 	public void giveTurnToNextPlayer() {
-		if (this.playerIdToPlayNextTurn > this.players.size()) {
+		if (this.playerIdToPlayNextTurn == this.players.size()) {
 			this.playerIdToPlayNextTurn = 1;
 		} else {
 			this.playerIdToPlayNextTurn++;
@@ -115,16 +125,25 @@ public class Board {
 	}
 
 	public void executeLandedOnGooseSquare(Player player, int currentGooseSquareId) {
-		int nextGooseSquareId = this.gooseSquaresIds.indexOf(currentGooseSquareId) + 1;
-		this.makePlayerGoTo(player, nextGooseSquareId);
-		this.givePlayerExtraTurn(player);
-		if (nextGooseSquareId == this.gooseSquaresIds.get(this.gooseSquaresIds.size() - 1)) {
-			BoardStateHandler.setGameRunningState(this);
+		if (currentGooseSquareId != 63) {
+			int currentGooseSquareIdIndex = this.gooseSquaresIds.indexOf(currentGooseSquareId);
+			int nextGooseSquareId;
+			if (currentGooseSquareIdIndex == this.gooseSquaresIds.size() - 1) {
+				nextGooseSquareId = this.gooseSquaresIds.get(currentGooseSquareIdIndex - 1);
+			} else {
+				nextGooseSquareId = this.gooseSquaresIds.get(currentGooseSquareIdIndex + 1);
+			}
+			if (nextGooseSquareId == this.gooseSquaresIds.get(this.gooseSquaresIds.size() - 1)) {
+				BoardStateHandler.setGameRunningState(this);
+			}
+			this.givePlayerExtraTurn(player);
+			this.makePlayerGoTo(player, nextGooseSquareId);
 		}
 	}
 
 	public void givePlayerExtraTurn(Player player) {
 		this.playerIdToPlayNextTurn = player.getId();
+		this.isExtraTurn = true;
 	}
 
 	public void executeLandedOnBridgeSquare(Player player, int currentBridgeSquareId) {
@@ -147,11 +166,16 @@ public class Board {
 
 	public BoardLastTurnAPI getBoardLastTurnAPI() {
 		int playerIdWhoPlayed;
-		if (this.playerIdToPlayNextTurn == 1) {
-			playerIdWhoPlayed = this.players.size();
+		if (this.isExtraTurn) {
+			playerIdWhoPlayed = this.playerIdToPlayNextTurn;
 		} else {
-			playerIdWhoPlayed = this.playerIdToPlayNextTurn - 1;
+			if (this.playerIdToPlayNextTurn == 1) {
+				playerIdWhoPlayed = this.players.size();
+			} else {
+				playerIdWhoPlayed = this.playerIdToPlayNextTurn - 1;
+			}
 		}
+
 		return new BoardLastTurnAPI(playerIdWhoPlayed, this.players.get(playerIdWhoPlayed).getSquareId(),
 				boardState instanceof GameOverState);
 	}
