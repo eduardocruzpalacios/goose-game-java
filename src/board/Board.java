@@ -176,8 +176,8 @@ public class Board {
 			}
 		}
 
-		return new BoardLastTurnAPI(playerIdWhoPlayed, this.players.get(playerIdWhoPlayed).getSquareId(),
-				boardState instanceof GameOverState);
+		return new BoardLastTurnAPI(playerIdWhoPlayed, DiceServiceSingleton.getInstance().getLastRollValue(),
+				this.players.get(playerIdWhoPlayed).getSquareId(), boardState instanceof GameOverState);
 	}
 
 }

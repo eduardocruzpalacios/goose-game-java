@@ -31,6 +31,7 @@ public class DiceService {
 		this.roll2Dice();
 		int diceResult = diceModel1.getFaceValue() + diceModel2.getFaceValue();
 		if (diceResult == 9) {
+			this.lastRollValue = diceResult;
 			if (diceModel1.getFaceValue() == 3 || diceModel2.getFaceValue() == 3) {
 				return 23;
 			}
