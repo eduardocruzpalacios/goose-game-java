@@ -105,7 +105,8 @@ public class Board {
 
 	public void makePlayerGoTo(Player player, int squareId) {
 		if (squareId > this.SQUARES_NUMBER) {
-			player.setSquareId(this.SQUARES_NUMBER - (squareId - this.SQUARES_NUMBER));
+			int validSquareId = this.SQUARES_NUMBER - (squareId - this.SQUARES_NUMBER);
+			player.setSquareId(validSquareId);
 		} else {
 			if (squareId == this.SQUARES_NUMBER && !this.isExtraTurn) {
 				BoardStateHandler.setGameOverState(this);
@@ -130,11 +131,9 @@ public class Board {
 			int nextGooseSquareId;
 			if (currentGooseSquareIdIndex == this.gooseSquaresIds.size() - 1) {
 				nextGooseSquareId = this.gooseSquaresIds.get(currentGooseSquareIdIndex - 1);
+				BoardStateHandler.setGameRunningState(this);
 			} else {
 				nextGooseSquareId = this.gooseSquaresIds.get(currentGooseSquareIdIndex + 1);
-			}
-			if (nextGooseSquareId == this.gooseSquaresIds.get(this.gooseSquaresIds.size() - 1)) {
-				BoardStateHandler.setGameRunningState(this);
 			}
 			this.givePlayerExtraTurn(player);
 			this.makePlayerGoTo(player, nextGooseSquareId);
@@ -157,7 +156,8 @@ public class Board {
 	}
 
 	public void executeLandedOnDiceSquare(Player player, int squareId) {
-		this.makePlayerGoTo(player, squareId + DiceServiceSingleton.getInstance().getLastRollValue());
+		int squaresToMove = squareId + DiceServiceSingleton.getInstance().getLastRollValue();
+		this.makePlayerGoTo(player, squareId + squaresToMove);
 	}
 
 	public void playNextTurn() {
