@@ -45,13 +45,13 @@ DiceService provides methods for:
 - get the value of 1 dice rolled
 - get the value of 2 dice rolled
 - get the value of 2 dice rolled with a different return values in these cases:
--- dice values are 3 and 6
--- dice values are 4 and 5
+  - dice values are 3 and 6
+  - dice values are 4 and 5
 
 DiceServiceSingleton gives the only instance of DiceService needed in execution time.
 
 Tradeoffs of this decision:
-- If new functionality is needed as for dice, it is only necessary to implement in DiceService not breaking existing uses if it
+- If new functionality is needed as for dice, it is only necessary to implement in DiceService not breaking existing uses of it
 
 UML class diagram:
 
