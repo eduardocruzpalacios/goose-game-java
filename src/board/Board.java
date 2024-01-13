@@ -83,7 +83,7 @@ public class Board {
 		this.boardState.playNextTurn();
 	}
 
-	public void makeNextPlayerToPlay() {
+	void makeNextPlayerToPlay() {
 		this.players.get(this.playerIdToPlayNextTurn).playTurn();
 	}
 
