@@ -12,7 +12,7 @@ public class PlayerNoTurnsState implements PlayerState {
 
 	@Override
 	public void playTurn() {
-		if (turnsWithoutPlaying > 0) {
+		if (turnsWithoutPlaying > 1) {
 			this.turnsWithoutPlaying--;
 		} else {
 			PlayerStateHandler.setRegularState(this.player);
