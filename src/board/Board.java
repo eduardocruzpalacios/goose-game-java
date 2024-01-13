@@ -44,7 +44,7 @@ public class Board {
 		BoardStateHandler.setGameRunningState(this);
 	}
 
-	public void setBoardState(BoardState boardState) {
+	void setBoardState(BoardState boardState) {
 		this.boardState = boardState;
 	}
 
