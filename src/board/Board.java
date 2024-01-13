@@ -117,7 +117,7 @@ public class Board {
 		}
 	}
 
-	public void giveTurnToNextPlayer() {
+	private void giveTurnToNextPlayer() {
 		if (this.playerIdToPlayNextTurn == this.players.size()) {
 			this.playerIdToPlayNextTurn = 1;
 		} else {
