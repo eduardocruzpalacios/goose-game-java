@@ -44,14 +44,6 @@ public class Board {
 		BoardStateHandler.setGameRunningState(this);
 	}
 
-	public Map<Integer, Player> getPlayers() {
-		return players;
-	}
-
-	public int getPlayerIdToPlayNextTurn() {
-		return playerIdToPlayNextTurn;
-	}
-
 	public void setBoardState(BoardState boardState) {
 		this.boardState = boardState;
 	}
@@ -92,7 +84,7 @@ public class Board {
 	}
 
 	public void makeNextPlayerToPlay() {
-		this.players.get(this.getPlayerIdToPlayNextTurn()).playTurn();
+		this.players.get(this.playerIdToPlayNextTurn).playTurn();
 	}
 
 	public void playerPlaysTurnAndLandsOnSquare(Player player, int squareId) {
