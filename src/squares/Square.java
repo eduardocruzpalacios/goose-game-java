@@ -17,9 +17,5 @@ public abstract class Square {
 		return id;
 	}
 
-	public Board getBoard() {
-		return board;
-	}
-
 	abstract public void landedOn(Player player);
 }

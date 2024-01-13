@@ -11,7 +11,7 @@ public class InnSquare extends Square {
 
 	@Override
 	public void landedOn(Player player) {
-		this.getBoard().makePlayerLooseTurns(player, 2);
+		this.board.makePlayerLooseTurns(player, 2);
 	}
 
 }

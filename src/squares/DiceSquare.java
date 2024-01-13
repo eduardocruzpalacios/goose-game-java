@@ -11,7 +11,7 @@ public class DiceSquare extends Square {
 
 	@Override
 	public void landedOn(Player player) {
-		this.getBoard().executeLandedOnDiceSquare(player, this.getId());
+		this.board.executeLandedOnDiceSquare(player, this.getId());
 	}
 
 }

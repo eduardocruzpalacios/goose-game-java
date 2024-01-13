@@ -44,15 +44,7 @@ public class Board {
 		BoardStateHandler.setGameRunningState(this);
 	}
 
-	public Map<Integer, Player> getPlayers() {
-		return players;
-	}
-
-	public int getPlayerIdToPlayNextTurn() {
-		return playerIdToPlayNextTurn;
-	}
-
-	public void setBoardState(BoardState boardState) {
+	void setBoardState(BoardState boardState) {
 		this.boardState = boardState;
 	}
 
@@ -87,6 +79,14 @@ public class Board {
 		}
 	}
 
+	public void playNextTurn() {
+		this.boardState.playNextTurn();
+	}
+
+	void makeNextPlayerToPlay() {
+		this.players.get(this.playerIdToPlayNextTurn).playTurn();
+	}
+
 	public void playerPlaysTurnAndLandsOnSquare(Player player, int squareId) {
 		if (this.isExtraTurn) {
 			this.isExtraTurn = false;
@@ -117,7 +117,7 @@ public class Board {
 		}
 	}
 
-	public void giveTurnToNextPlayer() {
+	private void giveTurnToNextPlayer() {
 		if (this.playerIdToPlayNextTurn == this.players.size()) {
 			this.playerIdToPlayNextTurn = 1;
 		} else {
@@ -140,7 +140,7 @@ public class Board {
 		}
 	}
 
-	public void givePlayerExtraTurn(Player player) {
+	private void givePlayerExtraTurn(Player player) {
 		this.playerIdToPlayNextTurn = player.getId();
 		this.isExtraTurn = true;
 	}
@@ -158,10 +158,6 @@ public class Board {
 	public void executeLandedOnDiceSquare(Player player, int squareId) {
 		int squaresToMove = squareId + DiceServiceSingleton.getInstance().getLastRollValue();
 		this.makePlayerGoTo(player, squareId + squaresToMove);
-	}
-
-	public void playNextTurn() {
-		this.boardState.playNextTurn();
 	}
 
 	public BoardLastTurnAPI getBoardLastTurnAPI() {

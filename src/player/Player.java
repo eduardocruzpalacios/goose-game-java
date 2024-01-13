@@ -27,7 +27,7 @@ public class Player {
 		this.squareId = squareId;
 	}
 
-	public void setPlayerState(PlayerState playerState) {
+	void setPlayerState(PlayerState playerState) {
 		this.playerState = playerState;
 	}
 

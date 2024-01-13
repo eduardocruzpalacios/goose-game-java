@@ -11,7 +11,7 @@ public class JailSquare extends Square {
 
 	@Override
 	public void landedOn(Player player) {
-		this.getBoard().makePlayerLooseTurns(player, 3);
+		this.board.makePlayerLooseTurns(player, 3);
 	}
 
 }
