@@ -140,7 +140,7 @@ public class Board {
 		}
 	}
 
-	public void givePlayerExtraTurn(Player player) {
+	private void givePlayerExtraTurn(Player player) {
 		this.playerIdToPlayNextTurn = player.getId();
 		this.isExtraTurn = true;
 	}
