@@ -87,6 +87,14 @@ public class Board {
 		}
 	}
 
+	public void playNextTurn() {
+		this.boardState.playNextTurn();
+	}
+
+	public void makeNextPlayerToPlay() {
+		this.players.get(this.getPlayerIdToPlayNextTurn()).playTurn();
+	}
+
 	public void playerPlaysTurnAndLandsOnSquare(Player player, int squareId) {
 		if (this.isExtraTurn) {
 			this.isExtraTurn = false;
@@ -158,10 +166,6 @@ public class Board {
 	public void executeLandedOnDiceSquare(Player player, int squareId) {
 		int squaresToMove = squareId + DiceServiceSingleton.getInstance().getLastRollValue();
 		this.makePlayerGoTo(player, squareId + squaresToMove);
-	}
-
-	public void playNextTurn() {
-		this.boardState.playNextTurn();
 	}
 
 	public BoardLastTurnAPI getBoardLastTurnAPI() {
