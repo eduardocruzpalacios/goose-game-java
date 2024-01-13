@@ -6,7 +6,7 @@ public class PlayerStateHandler {
 		player.setPlayerState(new PlayerFirstTurnState(player));
 	}
 
-	static public void setRegularState(Player player) {
+	static void setRegularState(Player player) {
 		player.setPlayerState(new PlayerRegularState(player));
 	}
 
